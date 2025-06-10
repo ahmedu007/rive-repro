@@ -1,59 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
+import Rive from 'rive-react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,55 +19,101 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={[styles.container, backgroundStyle]}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+      <View style={styles.content}>
+        <Text
+          style={[
+            styles.title,
+            {color: isDarkMode ? Colors.white : Colors.black},
+          ]}>
+          Rive Solar Animation
+        </Text>
+        <Text
+          style={[
+            styles.subtitle,
+            {color: isDarkMode ? Colors.light : Colors.dark},
+          ]}>
+          Powered by Rive React Native
+        </Text>
+
+        <View style={styles.riveContainer}>
+          <Rive
+            resourceName="2195-4346-avatar-pack-use-case"
+            style={styles.riveAnimation}
+            stateMachineName="avatar"
+          />
         </View>
-      </ScrollView>
+
+        <View style={styles.riveContainer}>
+          <Rive
+            url="https://public.rive.app/community/runtime-files/2195-4346-avatar-pack-use-case.riv"
+            artboardName="Avatar 1"
+            stateMachineName="avatar"
+            style={{width: 400, height: 400}}
+          />
+        </View>
+
+        <Text
+          style={[
+            styles.description,
+            {color: isDarkMode ? Colors.light : Colors.dark},
+          ]}>
+          This animation is loaded from assets/rive/solar.riv
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  title: {
+    fontSize: 28,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 8,
   },
-  sectionDescription: {
-    marginTop: 8,
+  subtitle: {
     fontSize: 18,
     fontWeight: '400',
+    textAlign: 'center',
+    marginBottom: 40,
   },
-  highlight: {
-    fontWeight: '700',
+  riveContainer: {
+    width: 300,
+    height: 300,
+    marginBottom: 40,
+    borderRadius: 20,
+    overflow: 'hidden',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  riveAnimation: {
+    width: '100%',
+    height: '100%',
+  },
+  description: {
+    fontSize: 16,
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
 });
 
