@@ -42,7 +42,7 @@ function App(): React.JSX.Element {
 
         <View style={styles.riveContainer}>
           <Rive
-            resourceName="2195-4346-avatar-pack-use-case"
+            resourceName="avatar"
             style={styles.riveAnimation}
             stateMachineName="avatar"
           />
